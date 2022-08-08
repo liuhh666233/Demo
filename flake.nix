@@ -33,7 +33,7 @@
       in rec {
         devShell =
           pkgs.mkShell.override { stdenv = pkgs.llvmPackages_11.stdenv; } rec {
-            name = "intraday-game";
+            name = "demo";
 
             packages = with pkgs; [
               # Development Tools
@@ -50,22 +50,17 @@
               spdlog
               abseil-cpp
               basis
-              (drogon.override { sqliteSupport = false; })
               nlohmann_json
               marl
-              clickhouse-cpp
-              # TODO: popl
-              # 3rd Party SDKs
-              (boost17x.override {
-                enablePython = true;
-                extraB2Args = [ " --with-locale stage " ];
-              })
             ];
 
             shellHook = let icon = "f121";
             in ''
+              export CC=clang
+              export CXX=clang++
               export PS1="$(echo -e '\u${icon}') {\[$(tput sgr0)\]\[\033[38;5;228m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]} (${name}) \\$ \[$(tput sgr0)\]"
             '';
+
           };
 
         defaultPackage = pkgs.callPackage ./default.nix { };
