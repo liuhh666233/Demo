@@ -16,6 +16,6 @@ int main()
 	}
     }
     printf("Bye\n");
-    exit(2);
+    exit(3);
 }
 /* $end waitprob1 */

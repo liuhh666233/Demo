@@ -24,7 +24,6 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
-
 /* Default file permissions are DEF_MODE & ~DEF_UMASK */
 /* $begin createmasks */
 #define DEF_MODE   S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP|S_IROTH|S_IWOTH
@@ -164,5 +163,6 @@ int open_listenfd(int portno);
 int Open_clientfd(char *hostname, int port);
 int Open_listenfd(int port); 
 
+#include "csapp.c"
 #endif /* __CSAPP_H__ */
 /* $end csapp.h */

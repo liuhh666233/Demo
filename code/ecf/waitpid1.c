@@ -1,6 +1,6 @@
 /* $begin waitpid1 */
 #include "csapp.h"
-#define N 2
+#define N 20
 
 int main() 
 {
