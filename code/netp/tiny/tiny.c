@@ -204,7 +204,7 @@ void serve_dynamic(int fd, char *filename, char *cgiargs)
  * clienterror - returns an error message to the client
  */
 /* $begin clienterror */
-void clienterror(int fd, char *cause, char *errnum, 
+void haclienterror(int fd, char *cause, char *errnum, 
 		 char *shortmsg, char *longmsg) 
 {
     char buf[MAXLINE], body[MAXBUF];
