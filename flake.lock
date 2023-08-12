@@ -1,29 +1,5 @@
 {
   "nodes": {
-    "basis-flake": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "utils": "utils",
-        "vitalpkgs": [
-          "vitalpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1652856284,
-        "narHash": "sha256-PRn3bBgWwYtV5gXolX1VxdHKruNPsbHingA3ILQubks=",
-        "ref": "master",
-        "rev": "72c7121d069f23b7d3aeb328efa86b57323ce87b",
-        "revCount": 61,
-        "type": "git",
-        "url": "ssh://git@github.com/quant-wonderland/basis"
-      },
-      "original": {
-        "type": "git",
-        "url": "ssh://git@github.com/quant-wonderland/basis"
-      }
-    },
     "flake-utils": {
       "locked": {
         "lastModified": 1620759905,
@@ -41,60 +17,28 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1627254826,
-        "narHash": "sha256-0FrYk5RXSXeDCiQWrid0jdd8w33WkmRjJMUdXX775vs=",
+        "lastModified": 1685566663,
+        "narHash": "sha256-btHN1czJ6rzteeCuE/PNrdssqYD2nIA4w48miQAFloM=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "e82ffe7b5f25d781eb52cc07c552899cf6f6547b",
+        "rev": "4ecab3273592f27479a583fb6d975d4aba3486fe",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
+        "ref": "23.05",
         "repo": "nixpkgs",
-        "rev": "e82ffe7b5f25d781eb52cc07c552899cf6f6547b",
-        "type": "github"
-      }
-    },
-    "nixpkgs-unstable": {
-      "locked": {
-        "lastModified": 1622437901,
-        "narHash": "sha256-ww6EcXDmOgJbx2DOGAW6PbIQK3K/WGCpFYW4yNyP/XM=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "f924460e91cba6473c5dc4b8ccb1a1cfc05bc2d7",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "f924460e91cba6473c5dc4b8ccb1a1cfc05bc2d7",
         "type": "github"
       }
     },
     "root": {
       "inputs": {
-        "basis-flake": "basis-flake",
         "nixpkgs": "nixpkgs",
-        "utils": "utils_2",
+        "utils": "utils",
         "vitalpkgs": "vitalpkgs"
       }
     },
     "utils": {
-      "locked": {
-        "lastModified": 1634851050,
-        "narHash": "sha256-N83GlSGPJJdcqhUxSCS/WwW5pksYf3VP1M13cDRTSVA=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "c91f3de5adaf1de973b797ef7485e441a65b8935",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "utils_2": {
       "locked": {
         "lastModified": 1653893745,
         "narHash": "sha256-0jntwV3Z8//YwuOjzhV2sgJJPt+HY6KhU7VZUL0fKZQ=",
@@ -114,15 +58,14 @@
         "flake-utils": "flake-utils",
         "nixpkgs": [
           "nixpkgs"
-        ],
-        "nixpkgs-unstable": "nixpkgs-unstable"
+        ]
       },
       "locked": {
-        "lastModified": 1634531087,
-        "narHash": "sha256-E1UXb0q/Sard1ywRk4HrT+nRPoskQ5Y0pQ7Ys1vkIzc=",
+        "lastModified": 1670396259,
+        "narHash": "sha256-DnF33nWxLwUz+9gxtQdUOzV5tR2LlNVPQxxq7mnRtMA=",
         "owner": "nixvital",
         "repo": "vitalpkgs",
-        "rev": "dc07cc44aaf127f7ebe581b8dc6dc7d2796366aa",
+        "rev": "65a0e8b156fa668062530266d426fa55bed3a40a",
         "type": "github"
       },
       "original": {

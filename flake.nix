@@ -1,70 +1,82 @@
 {
-  description = "Intraday game";
+  description = "The foundation of wonderland C++ infra.";
 
   inputs = {
-    nixpkgs.url =
-      "github:NixOS/nixpkgs?rev=e82ffe7b5f25d781eb52cc07c552899cf6f6547b";
-
+    # Pointing to the current stable release of nixpkgs. You can
+    # customize this to point to an older version or unstable if you
+    # like everything shining.
+    #
+    # E.g.
+    #
+    # nixpkgs.url = "github:NixOS/nixpkgs/unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/23.05";
     utils.url = "github:numtide/flake-utils";
-    utils.inputs.nixpkgs.follows = "nixpkgs";
 
     vitalpkgs.url = "github:nixvital/vitalpkgs";
     vitalpkgs.inputs.nixpkgs.follows = "nixpkgs";
-
-    basis-flake.url = "git+ssh://git@github.com/quant-wonderland/basis";
-    basis-flake.inputs.nixpkgs.follows = "nixpkgs";
-    basis-flake.inputs.vitalpkgs.follows = "vitalpkgs";
-
   };
 
-  outputs = { self, nixpkgs, utils, vitalpkgs, ... }@inputs:
-    inputs.utils.lib.eachSystem [ "x86_64-linux" ] (system:
-      let
-        pkgs = import nixpkgs {
-          inherit system;
-          overlays = [
-            vitalpkgs.overlay
-            (final: prev: {
-              basis = inputs.basis-flake.defaultPackage."${prev.system}";
-            })
-          ];
-          config.allowUnfree = true;
-        };
-      in rec {
-        devShell =
-          pkgs.mkShell.override { stdenv = pkgs.llvmPackages_11.stdenv; } rec {
-            name = "demo";
+  outputs = { self, nixpkgs, vitalpkgs, ... }@inputs: inputs.utils.lib.eachSystem [
+    # Add the system/architecture you would like to support here. Note that not
+    # all packages in the official nixpkgs support all platforms.
+    "x86_64-linux" "i686-linux" "aarch64-linux" "x86_64-darwin"
+  ] (system: let pkgs = import nixpkgs {
+                   inherit system;
 
-            packages = with pkgs; [
-              # Development Tools
-              llvmPackages_11.clang
-              cmake
-              cmakeCurses
-              vscode-include-fix
-              nixpkgs-fmt
+                   # Add overlays here if you need to override the nixpkgs
+                   # official packages.
+                    overlays = [
+                      vitalpkgs.overlays.default
+                    ];
+                     
+                   # Uncomment this if you need unfree software (e.g. cuda) for
+                   # your project.
+                   #
+                   # config.allowUnfree = true;
+                    config.permittedInsecurePackages = [
+                      # *Exceptionally*, those packages will be cached with their *secure* dependents
+                      # because they will reach EOL in the middle of the 23.05 release
+                      # and it will be too much painful for our users to recompile them
+                      # for no real reason.
+                      # Remove them for 23.11.
+                      "nodejs-16.20.1"
+                      "openssl-1.1.1u"
+                    ];
+                 };
+             in {
+               devShells.default = pkgs.mkShell.override {
+                 stdenv = pkgs.llvmPackages_16.stdenv;
+               } rec {
+                 # Update the name to something that suites your project.
+                 name = "basis";
 
-              # Development time dependencies
-              gtest
+                 packages = with pkgs; [
+                   # Development Tools
+                   cmake
 
-              # Build time and Run time dependencies
-              spdlog
-              abseil-cpp
-              basis
-              nlohmann_json
-              marl
-            ];
+                   # Development time dependencies
+                   gtest
 
-            shellHook = let icon = "f121";
-            in ''
-              export CC=clang
-              export CXX=clang++
-              export C_INCLUDE_PATH="$(pwd)/code/include"
-              export PS1="$(echo -e '\u${icon}') {\[$(tput sgr0)\]\[\033[38;5;228m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]} (${name}) \\$ \[$(tput sgr0)\]"
-            '';
+                   # Build time and Run time dependencies
+                   llvmPackages_16.clang
+                   (boost.override { enablePython = true; python = pkgs.python3; extraB2Args = [ " --with-locale stage " ]; })
+                   marl
+                   libmysqlconnectorcpp
+                   spdlog
+                   abseil-cpp
+                   nlohmann_json
+                   redis-plus-plus
+                   vscode-include-fix
+                 ];
 
-          };
+                 # Setting up the environment variables you need during
+                 # development.
+                 shellHook = let
+                   icon = "f121";
+                 in ''
+                    export PS1="$(echo -e '\u${icon}') {\[$(tput sgr0)\]\[\033[38;5;228m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]} (${name}) \\$ \[$(tput sgr0)\]"
+                 '';
+               };
 
-        defaultPackage = pkgs.callPackage ./default.nix { };
-
-      });
+             });
 }
