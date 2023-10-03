@@ -13,6 +13,7 @@ void func(int &x)
 void func(int &&x)
 {
     dbg("func(int &&x)");
+
     dbg(x);
 }
 template <typename T>
@@ -26,5 +27,6 @@ int main()
     int x = 1;
     relay(x);
     relay(1);
+    relay(12);
     return 0;
 }
