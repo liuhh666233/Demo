@@ -11,7 +11,7 @@ add_compile_definitions(SPDLOG_FMT_EXTERNAL)
 # Use the project root to find includes
 include_directories(${PROJECT_SOURCE_DIR})
 
-add_executable(CppTest filter_view.cc)
+add_executable(CppTest thread_test.cc)
 
 target_link_libraries(CppTest PRIVATE spdlog::spdlog)
 

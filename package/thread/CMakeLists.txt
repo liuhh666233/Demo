@@ -11,6 +11,12 @@ project(Test VERSION 1.0)
 # Use the project root to find includes
 include_directories(${PROJECT_SOURCE_DIR})
 
-add_executable(Test mutex.cc)
+add_executable(Test intro.cpp)
+
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+
+find_package(Threads REQUIRED)
+
+target_link_libraries(Test Threads::Threads)
 
 # target_link_libraries(Advanced PRIVATE spdlog::spdlog)
