@@ -67,6 +67,7 @@
                    nlohmann_json
                    redis-plus-plus
                    vscode-include-fix
+                   boost
                  ];
 
                  # Setting up the environment variables you need during
