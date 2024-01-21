@@ -66,6 +66,7 @@
                    nlohmann_json
                    vscode-include-fix
                    boost
+                   drogon
                  ];
 
                  # Setting up the environment variables you need during
