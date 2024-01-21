@@ -61,11 +61,9 @@
                    llvmPackages_16.clang
                    (boost.override { enablePython = true; python = pkgs.python3; extraB2Args = [ " --with-locale stage " ]; })
                    marl
-                   libmysqlconnectorcpp
                    spdlog
                    abseil-cpp
                    nlohmann_json
-                   redis-plus-plus
                    vscode-include-fix
                    boost
                  ];
