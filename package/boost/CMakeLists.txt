@@ -5,4 +5,4 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 project(Detection VERSION 1.0)
 
-add_executable(Detection main.cc)
+add_executable(Detection demanagle.cc)
